@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One-Page HTML5 Case Study Demo</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --brand:#2563eb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--ink); }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--ink); color: #fff;
+      padding: 14px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    header h1 { margin: 0; font-size: 18px; }
+    header .sub { margin: 2px 0 0; font-size: 12px; opacity: .9; }
+    nav { display: flex; gap: 10px; flex-wrap: wrap; }
+    nav a {
+      color:#fff; text-decoration:none; font-weight:800; font-size: 13px;
+      padding: 8px 10px; border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+    }
+    nav a:hover { background: rgba(255,255,255,0.12); }
+
+    main {
+      padding: 14px 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+      height: calc(100vh - 62px);
+      overflow: hidden;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 12px;
+      height: 100%;
+    }
+
+    section, article {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .stack { display: grid; gap: 12px; height: 100%; }
+    .stack > section { min-height: 0; }
+
+    .topTitle { margin: 0 0 8px; font-size: 18px; }
+    .note { margin: 6px 0 0; color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .kpis { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .pill {
+      font-size: 12px; color: #1f2937; font-weight: 800;
+      background: #eef2ff; border: 1px solid #c7d2fe;
+      padding: 7px 10px; border-radius: 999px;
+    }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .field { min-width: 0; }
+    label { display: block; font-size: 12.5px; font-weight: 900; margin-bottom: 6px; color:#374151; }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      font-size: 14px;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+
+    .actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    button {
+      border: 0; border-radius: 10px; cursor: pointer;
+      font-weight: 900; padding: 11px 14px; background: var(--brand); color: #fff;
+    }
+    button.secondary { background: #111827; }
+    button:hover { filter: brightness(0.95); }
+
+    .result {
+      margin-top: 12px;
+      border: 1px dashed #d1d5db;
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 12px;
+      white-space: pre-wrap;
+      font-size: 13.5px;
+      min-height: 92px;
+    }
+
+    /* Media: fit without scrolling */
+    .mediaWrap { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .mediaWrap video, .mediaWrap audio {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      max-height: 180px;
+    }
+
+    /* Keep everything visible on one screen */
+    .minH0 { min-height: 0; }
+    .flexCol { display: flex; flex-direction: column; }
+    .grow1 { flex: 1; min-height: 0; }
+    .noScroll { overflow: hidden; }
+
+    @media (max-width: 900px) {
+      main { height: auto; overflow: visible; }
+      .layout { grid-template-columns: 1fr; height: auto; }
+      .noScroll { overflow: visible; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>One-Page HTML5 Case Study Demo</h1>
+      <div class="sub">Semantics • HTML5 Form Inputs • Native Media</div>
+    </div>
+    <nav aria-label="Primary navigation">
+      <a href="#admissions">Admissions</a>
+      <a href="#programs">Programs</a>
+      <a href="#media">Media</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div class="stack minH0">
+        <section id="admissions" class="minH0">
+          <h2 class="topTitle">Admissions Application</h2>
+
+          <div class="kpis">
+            <div class="pill">Semantic: &lt;section&gt; &lt;article&gt;</div>
+            <div class="pill">Form: date/time/range</div>
+            <div class="pill">Validation</div>
+          </div>
+
+          <p class="note">
+            Uses HTML5 input types so users pick values with native controls instead of typing formats.
+          </p>
+
+          <div class="grid2" style="margin-top:10px;">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" type="text" placeholder="e.g., Sara Johnson" required minlength="2" />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="e.g., sara@example.com" required />
+            </div>
+
+            <div class="field">
+              <label for="startDate">Start Date</label>
+              <input id="startDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="contactTime">Contact Time</label>
+              <input id="contactTime" type="time" required />
+            </div>
+
+            <div class="field" style="grid-column: span 2;">
+              <label for="intensity">Study Intensity (1–10)</label>
+              <input id="intensity" type="range" min="1" max="10" value="5" />
+              <div class="note">Selected: <b><span id="intensityOut">5</span></b></div>
+            </div>
+
+            <div class="field" style="grid-column: span 2;">
+              <label for="program">Program</label>
+              <select id="program" required>
+                <option value="" selected disabled>Select a program</option>
+                <option value="cs">Computer Science</option>
+                <option value="business">Business</option>
+                <option value="design">Design</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" id="submitBtn">Submit</button>
+            <button type="button" class="secondary" id="resetBtn">Reset</button>
+          </div>
+
+          <div class="result" id="applyResult" role="status" aria-live="polite">
+            Fill the form and click Submit to see the summary.
+          </div>
+        </section>
+
+        <section id="programs" class="noScroll minH0">
+          <h2 class="topTitle">Featured Programs</h2>
+          <div class="grid2" style="margin-top:8px;">
+            <article>
+              <h3 style="margin:0 0 6px; font-size:15px;">Computer Science</h3>
+              <div class="note" style="margin:0;">Web development • AI basics • Data structures</div>
+            </article>
+            <article>
+              <h3 style="margin:0 0 6px; font-size:15px;">Business</h3>
+              <div class="note" style="margin:0;">Analytics • Marketing • Management</div>
+            </article>
+            <article>
+              <h3 style="margin:0 0 6px; font-size:15px;">Design</h3>
+              <div class="note" style="margin:0;">Typography • UI/UX • Prototyping</div>
+            </article>
+            <article>
+              <h3 style="margin:0 0 6px; font-size:15px;">Support</h3>
+              <div class="note" style="margin:0;">Semantic layout improves scanning & accessibility</div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <div class="stack minH0">
+        <section id="media" class="minH0">
+          <h2 class="topTitle">Native Media (HTML5)</h2>
+          <p class="note">
+            Replace the placeholder files below with your real <code>.mp4</code> and <code>.mp3</code> URLs.
+            Most browsers play them without plugins using <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code>.
+          </p>
+
+          <div class="mediaWrap" style="margin-top:10px;">
+            <article>
+              <h3 style="margin:0 0 6px; font-size:15px;">Orientation Video</h3>
+              <video controls preload="metadata">
+                <source src="sample-video.mp4" type="video/mp4" />
+              </video>
+              <div class="note">If media doesn’t load, update <code>src</code> to a working video URL.</div>
+            </article>
+
+            <article>
+              <h3 style="margin:0 0 6px; font-size:15px;">Principal’s Audio</h3>
+              <audio controls preload="metadata">
+                <source src="sample-audio.mp3" type="audio/mpeg" />
+              </audio>
+              <div class="note">Update <code>src</code> to a working audio URL.</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="minH0">
+          <h2 class="topTitle">Summary of Impact</h2>
+          <article style="margin-top:0;">
+            <ul style="margin:0; padding-left:18px; color:#111827; line-height:1.6;">
+              <li><b>Semantics:</b> clearer page meaning with HTML5 elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>.</li>
+              <li><b>Usability:</b> date/time/range inputs reduce typing errors.</li>
+              <li><b>Functionality:</b> native media playback using <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code>.</li>
+              <li><b>Maintainability:</b> easier to reuse sections and templates.</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align:center; padding:14px; color:var(--muted);">
+    © <span id="year"></span> Northview University • Admissions Office
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const yearEl = $("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    const intensity = $("intensity");
+    const intensityOut = $("intensityOut");
+    intensityOut.textContent = intensity.value;
+
+    intensity.addEventListener("input", () => {
+      intensityOut.textContent = intensity.value;
+    });
+
+    function formatISODate(yyyyMmDd) {
+      const dt = new Date(yyyyMmDd + "T00:00:00");
+      return dt.toLocaleDateString();
+    }
+
+    function validateBasics() {
+      const fullName = $("fullName").value.trim();
+      const email = $("email").value.trim();
+      const startDate = $("startDate").value;
+      const contactTime = $("contactTime").value;
+      const program = $("program").value;
+
+      if (!fullName) return { ok:false, msg:"Please enter your full name." };
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) return { ok:false, msg:"Please enter a valid email address." };
+      if (!startDate) return { ok:false, msg:"Please select a start date." };
+      if (!contactTime) return { ok:false, msg:"Please select a contact time." };
+      if (!program) return { ok:false, msg:"Please choose a program." };
+
+      return { ok:true };
+    }
+
+    $("submitBtn").addEventListener("click", () => {
+      const check = validateBasics();
+      if (!check.ok) {
+        $("applyResult").textContent = "⚠️ " + check.msg;
+        return;
+      }
+
+      const fullName = $("fullName").value.trim();
+      const email = $("email").value.trim();
+      const startDate = $("startDate").value;
+      const contactTime = $("contactTime").value;
+      const program = $("program").value;
+      const intensityValue = $("intensity").value;
+
+      const programMap = {
+        cs: "Computer Science",
+        business: "Business",
+        design: "Design"
+      };
+
+      const summary =
+        `Application Submitted!\n` +
+        `Name: ${fullName}\n` +
+        `Email: ${email}\n` +
+        `Program: ${programMap[program] || program}\n` +
+        `Start Date: ${formatISODate(startDate)}\n` +
+        `Contact Time: ${contactTime}\n` +
+        `Study Intensity: ${intensityValue}/10`;
+
+      $("applyResult").textContent = summary;
+    });
+
+    $("resetBtn").addEventListener("click", () => {
+      $("fullName").value = "";
+      $("email").value = "";
+      $("startDate").value = "";
+      $("contactTime").value = "";
+      $("program").value = "";
+      $("intensity").value = 5;
+      $("intensityOut").textContent = "5";
+      $("applyResult").textContent = "Fill the form and click Submit to see the summary.";
+    });
+
+    window.addEventListener("load", () => {
+      $("fullName").focus();
+    });
+  </script>
+</body>
+</html>

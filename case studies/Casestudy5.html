@@ -1,0 +1,192 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arrays & Loops - Max & Min</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f7fb;
+      margin: 0;
+      padding: 24px;
+      color: #111;
+    }
+    h1, h2 { text-align: center; }
+    .box {
+      max-width: 720px;
+      margin: 18px auto 0;
+      background: #fff;
+      border: 1px solid #e3e5ee;
+      border-radius: 12px;
+      padding: 18px;
+    }
+    label { display: block; margin-bottom: 8px; font-weight: 600; }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d9dbe7;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    button {
+      padding: 10px 16px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button.secondary { background: #111827; }
+    button:hover { opacity: 0.95; }
+    p { margin: 8px 0; line-height: 1.4; }
+    .out {
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px;
+      min-height: 40px;
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>CASE STUDY</h1>
+    <h2>Find Maximum and Minimum in an Array</h2>
+
+    <label for="numbers">Enter numbers (comma separated):</label>
+    <input id="numbers" type="text" value="10, 5, 25, 3, 18" />
+
+    <div class="buttons">
+      <button id="btnRun">Find Max & Min</button>
+      <button class="secondary" id="btnDemo">Demo: push/pop/shift/unshift/splice/slice + map/filter/reduce/forEach</button>
+    </div>
+
+    <p><b>Array:</b> <span id="arrOut">-</span></p>
+    <p><b>Minimum:</b> <span id="minOut">-</span></p>
+    <p><b>Maximum:</b> <span id="maxOut">-</span></p>
+
+    <p><b>Demo Output:</b></p>
+    <div id="demoOut" class="out">Click “Demo” to run array operations and methods.</div>
+  </div>
+
+  <script>
+    const input = document.getElementById("numbers");
+    const btnRun = document.getElementById("btnRun");
+    const btnDemo = document.getElementById("btnDemo");
+    const arrOut = document.getElementById("arrOut");
+    const minOut = document.getElementById("minOut");
+    const maxOut = document.getElementById("maxOut");
+    const demoOut = document.getElementById("demoOut");
+
+    function parseNumbers(text) {
+      return text
+        .split(",")
+        .map(x => x.trim())
+        .filter(x => x.length > 0)
+        .map(Number);
+    }
+
+    // CASE STUDY:
+    btnRun.addEventListener("click", () => {
+      const arr = parseNumbers(input.value);
+
+      if (arr.length === 0 || arr.some(n => Number.isNaN(n))) {
+        arrOut.textContent = "Invalid input";
+        minOut.textContent = "-";
+        maxOut.textContent = "-";
+        return;
+      }
+
+      let min = arr[0];
+      let max = arr[0];
+
+      for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < min) min = arr[i];
+        if (arr[i] > max) max = arr[i];
+      }
+
+      arrOut.textContent = arr.join(", ");
+      minOut.textContent = String(min);
+      maxOut.textContent = String(max);
+    });
+
+    // DEMO: re-runs properly on EVERY click
+    btnDemo.addEventListener("click", () => {
+      let log = [];
+
+      // A) push, pop
+      let a = [1, 2, 3];
+      log.push(`Start array a = ${JSON.stringify(a)}`);
+
+      a.push(4);
+      log.push(`After push(4) => ${JSON.stringify(a)}`);
+
+      const popped = a.pop();
+      log.push(`After pop() removed ${popped} => ${JSON.stringify(a)}`);
+
+      // A) shift, unshift
+      const shifted = a.shift();
+      log.push(`After shift() removed ${shifted} => ${JSON.stringify(a)}`);
+
+      a.unshift(9);
+      log.push(`After unshift(9) => ${JSON.stringify(a)}`);
+
+      // A) splice
+      let b = [10, 20, 30, 40, 50];
+      log.push(`Start array b = ${JSON.stringify(b)}`);
+
+      b.splice(2, 2, 99, 100);
+      log.push(`After splice(2, 2, 99, 100) => ${JSON.stringify(b)}`);
+
+      // A) slice
+      let c = [5, 10, 15, 20, 25];
+      log.push(`Start array c = ${JSON.stringify(c)}`);
+
+      const sliced = c.slice(1, 4);
+      log.push(`After slice(1, 4) => ${JSON.stringify(sliced)}`);
+
+      // B) forEach
+      log.push(`\nforEach on [1,2,3]:`);
+      [1, 2, 3].forEach((value, index) => {
+        log.push(`index ${index} -> value ${value}`);
+      });
+
+      // B) map
+      const nums = [1, 2, 3, 4];
+      const mapped = nums.map(x => x * 10);
+      log.push(`\nmap(x => x * 10) on ${JSON.stringify(nums)} => ${JSON.stringify(mapped)}`);
+
+      // B) filter
+      const filtered = nums.filter(x => x % 2 === 0);
+      log.push(`filter(x => x % 2 === 0) => ${JSON.stringify(filtered)}`);
+
+      // B) reduce
+      const sum = nums.reduce((acc, x) => acc + x, 0);
+      log.push(`reduce((acc, x) => acc + x, 0) => ${sum}`);
+
+      // IMPORTANT: overwrite output each time so it shows on every click
+      demoOut.textContent = log.join("\n");
+    });
+
+    // Run case-study once on load
+    btnRun.click();
+  </script>
+</body>
+</html>
